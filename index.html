@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Jeu : Clique sur le carré</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+        }
+        #game {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            border: 2px solid #333;
+            background-color: #fafafa;
+        }
+        #target {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: #3498db;
+            cursor: pointer;
+        }
+        #score {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div>
+        <h1>Mini Jeu : Clique sur le carré</h1>
+        <div id="game">
+            <div id="target"></div>
+        </div>
+        <p id="score">Score: 0</p>
+    </div>
+
+    <script>
+        const gameArea = document.getElementById('game');
+        const target = document.getElementById('target');
+        const scoreDisplay = document.getElementById('score');
+
+        let score = 0;
+
+        // Fonction pour déplacer la cible de manière aléatoire dans le gameArea
+        function moveTarget() {
+            const gameAreaWidth = gameArea.clientWidth - target.offsetWidth;
+            const gameAreaHeight = gameArea.clientHeight - target.offsetHeight;
+
+            const randomX = Math.floor(Math.random() * gameAreaWidth);
+            const randomY = Math.floor(Math.random() * gameAreaHeight);
+
+            target.style.left = `${randomX}px`;
+            target.style.top = `${randomY}px`;
+        }
+
+        // Incrémente le score quand le joueur clique sur la cible
+        target.addEventListener('click', () => {
+            score++;
+            scoreDisplay.textContent = `Score: ${score}`;
+            moveTarget();
+        });
+
+        // Déplace la cible à une position initiale
+        moveTarget();
+    </script>
+
+</body>
+</html>
